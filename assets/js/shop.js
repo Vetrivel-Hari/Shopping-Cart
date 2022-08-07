@@ -25,7 +25,6 @@ let app = new Vue({
                             c = 1;
                             break;
                         }
-                        console.log(i)
                     }
                 }
 
@@ -51,7 +50,7 @@ let app = new Vue({
 
 
                 document.cookie = 'cart=' + JSON.stringify(jsonCartCookies) + ';max-age=31536000;';
-                console.log(document.cookie);
+                alert("ITEM ADDED TO THE CART");
             },
     },
     async beforeMount()
@@ -65,7 +64,6 @@ let app = new Vue({
             .then(response => response.json())
             .then(result => {
                 for(i of result['data']['data']){
-                    console.log(i['name'])
                     this.item_data.push(i);
                 }
             })
