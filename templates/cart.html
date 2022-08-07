@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruitkha</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+    <link rel = "stylesheet" href="../assets/css/cart.css">
+
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+<body>
+    <div class = "first-page">
+        <div class = "header" id = "header">
+            <div class = "header-container">
+                <div class = "logo-div">
+                    <a href = "index.html">
+                        <img class = "header-logo" src="../assets/img/logo.png">
+                    </a>
+                </div>
+                <div class = "nav-items">
+                    <div class = "nav-item">
+                        <a href = "index.html" class = "a-nav-item">HOME</a>
+                    </div>
+                    <div class = "nav-item">
+                        <a href = "shop.html" class = "a-nav-item">SHOP</a>
+                    </div>
+                </div>
+                <div class = "header-icons">
+                    <a class="a-shopping-cart" href = "">
+                        <i class="fa fa-shopping-cart fa-lg"></i>
+                    </a>
+                </div>
+            
+                <div class = "mobile-menu">
+                    <a class = "menu-icon" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                    </a>
+                
+                    <div class="collapse" id="collapseExample">
+                    <div class="card card-body menu-card">
+                        <div class = "nav-item">
+                            <a href = "index.html" class = "a-nav-item">HOME</a>
+                        </div>
+                        <hr>
+                        <div class = "nav-item">
+                            <a href = "shop.html" class = "a-nav-item">SHOP</a>
+                        </div>
+                        <hr>
+                        <div class = "nav-item">
+                            <a href = "cart.html" class = "a-nav-item">CART</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "main-container">
+            <div class="waviy">
+                <span style="--i:1"><p class = "subtitle">F</p></span>
+                <span style="--i:2"><p class = "subtitle">R</p></span>
+                <span style="--i:3"><p class = "subtitle">E</p></span>
+                <span style="--i:4"><p class = "subtitle">S</p></span>
+                <span style="--i:5"><p class = "subtitle">H</p></span>
+                <span style="--i:6"> </span>
+                <span style="--i:6"> </span>
+                <span style="--i:6"><p class = "subtitle">&</p></span>
+                <span style="--i:6"> </span>
+                <span style="--i:6"> </span>
+                <span style="--i:7"><p class = "subtitle">O</p></span>
+                <span style="--i:8"><p class = "subtitle">R</p></span>
+                <span style="--i:9"><p class = "subtitle">G</p></span>
+                <span style="--i:10"><p class = "subtitle">A</p></span>
+                <span style="--i:11"><p class = "subtitle">N</p></span>
+                <span style="--i:12"><p class = "subtitle">I</p></span>
+                <span style="--i:13"><p class = "subtitle">C</p></span>
+               </div>
+            <p class = "animate-charcter">CART</p>
+        </div>
+    </div>
+    </div>
+    
+    <div id = "app" class = "second-page">
+        <div class="second-heading">
+            <span class = "our">Your</span><span class = "products"> Cart</span>
+            <hr class = "underline">
+        </div>
+        <div v-if = "items_available == false" class="second-heading">
+            <span class = "products">CART IS</span><span class = "our"> EMPTY</span>
+            <hr class = "underline">
+        </div>
+        <div v-if = "checkout == true" class="second-heading">
+            <span class = "products">PAY</span><span class = "our"> &#8377 {{ total }}</span><span class = "products"> AS</span><span class = "our"> COD</span>
+            <hr class = "underline">
+        </div>
+        <div v-if = "items_available == true && checkout == false" class = "row">
+            <div>
+                <table class="cart-table">
+                    <thead class="cart-table-head">
+                        <td class="cart-table-td-head img-td">Product Image</td>
+                        <td class="cart-table-td-head">Name</td>
+                        <td class="cart-table-td-head">Price</td>
+                        <td class="cart-table-td-head">Quantity</td>
+                        <td class="cart-table-td-head">Total</td>
+                    </thead>
+                    <tbody>
+                        <tr v-for = "i in item_data" class="cart-table-tr">
+                            <td class="cart-table-td img-td"><img v-bind:src=i.url alt="" class="product-image"></td>
+                            <td class="cart-table-td">{{ i['name'] }}</td>
+                            <td class="cart-table-td">&#8377 {{ i['price'] }}</td>
+                            <td class="cart-table-td"><input v-bind:id = i._id type="number" v-bind:value = i.quantity placeholder="0" min="0"></td>
+                            <td class="cart-table-td">{{ i['quantity'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="second-div">
+                <div class="total-table">
+                    <table class="cart-table">
+                        <thead class="cart-table-head-s">
+                            <td class="cart-table-td-head-s">Total</td>
+                            <td class="cart-table-td-head-s">Price</td>
+                        </thead>
+                        <tbody>
+                            <tr class="cart-table-tr-s">
+                                <td class="cart-table-td-head-s"  style="background-color: #FFFFFF;">Subtotal:</td>
+                                <td class="cart-table-td-s">&#8377 {{ subtotal }}</td>
+                            </tr>
+                            <tr class="cart-table-tr-s">
+                                <td class="cart-table-td-head-s"  style="background-color: #FFFFFF;">Shipping:</td>
+                                <td class="cart-table-td-s">&#8377 {{ shipping }}</td>
+                            </tr>
+                            <tr class="cart-table-tr">
+                                <td class="cart-table-td-head-s" style="background-color: #FFFFFF;">Total:</td>
+                                <td class="cart-table-td-s">&#8377 {{ total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-div">
+                    <button @click="updateCart()">UPDATE CART</button>
+                    <button @click="checkoutProducts()">CHECKOUT</button>
+                </div>
+            </div>
+         </div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../assets/js/cart.js"></script>
+<script type="text/javascript" src="../assets/js/main.js"></script>
+
+</html>
